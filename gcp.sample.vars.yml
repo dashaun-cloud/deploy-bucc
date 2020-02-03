@@ -1,0 +1,26 @@
+# bucc up --gcp
+
+director_name: bucc
+gcp_credentials_json:  |
+    {
+      "type": "service_account",
+      "project_id": "changeme",
+      "private_key_id": "changeme",
+      "private_key": "changeme"
+      "client_email": "changme",
+      "client_id": "changme",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "client_x509_cert_url": ""
+    }
+internal_cidr:  10.128.0.0/20
+internal_gw:  10.128.0.1
+internal_ip:  10.128.0.2
+network:  default
+project_id: changme
+subnetwork: default
+tags:  [bucc] #make rules to open ports for this tag
+zone:  us-central1-a
+
+concourse_domain: ci.gcp.dashaun.cloud
