@@ -1,4 +1,4 @@
-# bucc up --gcp
+# bucc up --cpi gcp --concourse-lb
 
 director_name: bucc
 gcp_credentials_json:  |
