@@ -61,9 +61,13 @@ if [ "$1" = "azure" ]; then
   credhub set -n /concourse/$2/azure_terraform_storage_account_name -t value -v "$(credhub get -n /concourse/pa/azure_terraform_storage_account_name -j | jq .value)"
 fi
 
+echo "Right now we are assuming that your domain name is managed by CloudFlare"
+
 # Create temporary cloudflare.ini file
 echo "dns_cloudflare_email = "$(credhub get -n /concourse/pa/cloudflare_email -j | jq .value)"" >> ./cloudflare.ini
 echo "dns_cloudflare_api_key = "$(credhub get -n /concourse/pa/cloudflare_key -j | jq .value)"" >> ./cloudflare.ini
+
+echo "There will be a warning on the next run - but you can ignore it, because I delete the file after"
 
 # Create or update the certificate
 sudo certbot certonly --dns-cloudflare \
@@ -89,9 +93,11 @@ credhub set -n /concourse/$2/acme_cert \
             -c "$(sudo cat /etc/letsencrypt/live/$2.$1.dashaun.cloud/fullchain.pem)" \
             -p "$(sudo cat /etc/letsencrypt/live/$2.$1.dashaun.cloud/privkey.pem)"
 
-echo "Certs updated"
+echo "If there were no DNS timeout errors, the certs were created/updated."
+echo "If there were timeouts, its okay to re-run this script multiple times, its idempotent"
 
 # Delete the temporary cloudflare.ini file
 rm ./cloudflare.ini
 
 echo "Cleanup complete"
+
