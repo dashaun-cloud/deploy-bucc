@@ -1,0 +1,26 @@
+# bucc up --cpi vsphere --dns --resource-pool --concourse-lb
+
+director_name: bucc
+# alias: bucc
+internal_cidr: 10.0.0.0/24
+internal_gw: 10.0.0.1
+internal_ip: 10.0.0.2
+network_name: "VM Network"
+vcenter_cluster: cluster1
+vcenter_dc: datacenter1
+vcenter_disks: bosh-1-disks
+vcenter_ds: disk1
+vcenter_ip: 192.168.1.2
+vcenter_password: *************************
+vcenter_templates: bosh-1-templates
+vcenter_user: administrator@homelab.dashaun.cloud
+vcenter_vms: bosh-1-vms
+
+# flag: --resource-pool
+vcenter_rp: bucc
+
+# flag: --dns
+vcenter_dns: [192.168.1.3]
+
+# flag: --concourse-lb
+concourse_domain: ci.vsphere.dashaun.cloud
