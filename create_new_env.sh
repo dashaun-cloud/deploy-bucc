@@ -1,4 +1,13 @@
 #!/bin/bash
+
+### Assuming Ubuntu 18.04 | 19.04 | 19.10
+### These steps should allow this script to work
+#sudo apt update
+#sudo apt install software-properties-common
+#sudo add-apt-repository universe
+#sudo add-apt-repository ppa:certbot/certbot
+#sudo apt install certbot python3-certbot-dns-cloudflare -y
+
 echo "IAAS = " $1
 echo "Environment Name = " $2
 
