@@ -29,5 +29,3 @@ Once bucc has configured the bosh/concourse vm:
 - add target to fly (fly --target example login --team-name my-team --concourse-url https://ci.example.com --insecure)
 - create team in concourse (fly -t example set-team --team-name my-team --local-user foo)
 - fly pipelines!
-
-sudo docker run -p 443:443 --name minio1 -e "MINIO_ACCESS_KEY=minio" -e "MINIO_SECRET_KEY=Meatwad01!" -d -v /home/snoyes/.minio:/root/.minio/ -v /mnt/data:/data minio/minio server --address ":443" /data
