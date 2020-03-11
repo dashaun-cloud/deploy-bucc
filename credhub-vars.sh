@@ -7,7 +7,7 @@
 credhub set --type value --name /concourse/pa/wavefront-token --value <API token>
 credhub set --type value --name /concourse/pa/sendgrid-api --value <API token>
 credhub set --type value --name /concourse/pa/pivnet_token --value <API token>
-credhub set --type value --name /concourse/pa/git_ssh_key  --value <path to public key> 
+credhub set --type ssh --name /concourse/pa/git_ssh_key --public <path to public key> --private <path to private key>
 credhub set --type value --name /concourse/pa/cloudflare_email --value <account email>
 credhub set --type value --name /concourse/pa/cloudflare_key --value <API token>
 credhub set --type value --name /concourse/pa/email --value <notification email>
