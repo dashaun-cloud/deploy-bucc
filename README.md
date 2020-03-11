@@ -9,19 +9,24 @@ Additional installation:
 - jq
 - yyt
 - certbot
+	- sudo apt update
+	- sudo apt install software-properties-common
+	- sudo add-apt-repository universe
+	- sudo add-apt-repository ppa:certbot/certbot
+	- sudo apt install certbot python3-certbot-dns-cloudflare -y
 - docker
 - yaml-patch
 - minio (for on-prem/vsphere - create cert, run as https)
-	sudo certbot certonly --dns-cloudflare \
+	- sudo certbot certonly --dns-cloudflare \
        --dns-cloudflare-propagation-seconds 60  \
        --dns-cloudflare-credentials ./cloudflare.ini \
        --preferred-challenges dns-01 \
        -d minio.domain \
        --agree-tos \
        -m email
-       
-    sudo docker run -p 443:443 --name minio1 -e "MINIO_ACCESS_KEY=key" -e "MINIO_SECRET_KEY=password" -d -v /home/snoyes/.minio:/root/.minio/ -v /mnt/data:/data minio/minio server --address ":443" /data
-    - create 2 buckets (foundation-installations, platform-automation)
+
+    - sudo docker run -p 443:443 --name minio1 -e "MINIO_ACCESS_KEY=key" -e "MINIO_SECRET_KEY=password" -d -v /home/snoyes/.minio:/root/.minio/ -v /mnt/data:/data minio/minio server --address ":443" /data
+      - create 2 buckets (foundation-installations, platform-automation)
 
 Once bucc has configured the bosh/concourse vm:
 - add default creds to credhub unless they exist (./credhub-vars.sh)
