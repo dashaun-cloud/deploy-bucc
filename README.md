@@ -16,10 +16,10 @@ Additional installation:
        --dns-cloudflare-propagation-seconds 60  \
        --dns-cloudflare-credentials ./cloudflare.ini \
        --preferred-challenges dns-01 \
-       -d <minio.domain> \
+       -d minio.domain \
        --agree-tos \
-       -m <email>
-    sudo docker run -p 443:443 --name minio1 -e "MINIO_ACCESS_KEY=<key>" -e "MINIO_SECRET_KEY=<password>" -d -v /home/snoyes/.minio:/root/.minio/ -v /mnt/data:/data minio/minio server --address ":443" /data
+       -m email
+    sudo docker run -p 443:443 --name minio1 -e "MINIO_ACCESS_KEY=key" -e "MINIO_SECRET_KEY=password" -d -v /home/snoyes/.minio:/root/.minio/ -v /mnt/data:/data minio/minio server --address ":443" /data
     - create 2 buckets (foundation-installations, platform-automation)
 
 Once bucc has configured the bosh/concourse vm:
