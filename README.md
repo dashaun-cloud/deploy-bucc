@@ -6,8 +6,8 @@ For GCP: bucc up --cpi gcp --concourse-lb
 - Add a tag so we can create some firewall rules around it.  I've used "bucc" in the sample vars file.
 
 Additional installation:
-- jq
-- yyt
+- jq - apt install jq
+- ytt - https://github.com/k14s/ytt
 - certbot
 	- sudo apt update
 	- sudo apt install software-properties-common
@@ -15,7 +15,7 @@ Additional installation:
 	- sudo add-apt-repository ppa:certbot/certbot
 	- sudo apt install certbot python3-certbot-dns-cloudflare -y
 - docker
-- yaml-patch
+- yaml-patch - https://github.com/krishicks/yaml-patch/releases
 - minio (for on-prem/vsphere - create cert, run as https)
 	- sudo certbot certonly --dns-cloudflare \
        --dns-cloudflare-propagation-seconds 60  \
