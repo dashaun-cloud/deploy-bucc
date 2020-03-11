@@ -11,7 +11,7 @@ Additional installation:
 - certbot
 - docker
 - yaml-patch
-- minio (for on-prem - create cert, run as https)
+- minio (for on-prem/vsphere - create cert, run as https)
 	sudo certbot certonly --dns-cloudflare \
        --dns-cloudflare-propagation-seconds 60  \
        --dns-cloudflare-credentials ./cloudflare.ini \
