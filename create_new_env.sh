@@ -71,7 +71,7 @@ if [ "$1" = "azure" ]; then
   credhub set -n /concourse/$2/azure_terraform_storage_account_name -t value -v "$(credhub get -n /concourse/pa/azure_terraform_storage_account_name -j | jq .value)"
 fi
 
-if [ "$1" = "vsphere"]; then
+if [ "$1" = "vsphere" ]; then
   echo "Adding VSphere vals"
   credhub set --type value --name /concourse/$2/homelab_dns --value "$(credhub get -n /concourse/pa/homelab_dns -j | jq .value)"
   credhub set --type value --name /concourse/$2/homelab_netmask --value "$(credhub get -n /concourse/pa/homelab_netmask -j | jq .value)"
@@ -85,7 +85,7 @@ if [ "$1" = "vsphere"]; then
   credhub set --type value --name /concourse/$2/vcenter_folder --value "$(credhub get -n /concourse/pa/vcenter_folder -j | jq .value)"
   credhub set --type value --name /concourse/$2/vcenter_host --value "$(credhub get -n /concourse/pa/vcenter_host -j | jq .value)"
   credhub set --type value --name /concourse/$2/vcenter_url --value "$(credhub get -n /concourse/pa/vcenter_url -j | jq .value)"
-  credhub set --type value --name /concourse/$2/vcenter_user --value "$(credhub get -n /concourse/pa/vcenter_user -j | jq .value)"
+  credhub set --type user --name /concourse/$2/vcenter_user --username "$(credhub get -n /concourse/pa/vcenter_user -j | jq .value)" --password "$(credhub get -n /concourse/pa/vcenter_password -j | jq .value)"
   credhub set --type value --name /concourse/$2/vcenter_datastore --value "$(credhub get -n /concourse/pa/vcenter_datastore -j | jq .value)"
   credhub set --type value --name /concourse/$2/vcenter_dc --value "$(credhub get -n /concourse/pa/vcenter_dc -j | jq .value)"
   credhub set --type value --name /concourse/$2/opsman_hostname --value "$(credhub get -n /concourse/pa/opsman_hostname -j | jq .value)"
