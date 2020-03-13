@@ -1,12 +1,15 @@
 # deploy-bucc
 - create a jumpbox
 - Make sure to grab a release and not master from https://github.com/starkandwayne/bucc
-- uncompress and mv to ~/bucc (or whatever)
+- uncompress and mv to ~/bucc (or whatever works for you)
+- follow initial setup from https://github.com/starkandwayne/bucc/
 - clone this repo
 ```
+cd deploy-bucc
 cp create_new_env.sh ~/bucc
 cp credhub-vars.sh ~/bucc
 ```
+
 
 # Additional Installations and Steps
 - jq
@@ -24,7 +27,8 @@ apt install certbot python3-certbot-dns-cloudflare -y
 ```
 - docker
 - yaml-patch - https://github.com/krishicks/yaml-patch/releases
-- minio (for on-prem/vsphere - create cert, run as https)
+- minio (for on-prem/vsphere only!)
+  - create cert, run as https
 ```
 certbot certonly --dns-cloudflare \
   --dns-cloudflare-propagation-seconds 60  \
