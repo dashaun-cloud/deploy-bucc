@@ -115,16 +115,6 @@ sudo certbot certonly --dns-cloudflare \
                       -m "$(credhub get -n /concourse/pa/email -j | jq .value)" \
                       --cert-path ./
 
-sudo certbot certonly --standalone --preferred-challenges http \
-                      -d $2.$1.$3 \
-                      -d *.apps.$2.$1.$3 \
-                      -d *.sys.$2.$1.$3 \
-                      -d opsmanager.$2.$1.$3 \
-                      -d *.pks.$2.$1.$3 \
-                      --agree-tos \
-                      -m "$(credhub get -n /concourse/pa/email -j | jq .value)" \
-                      --cert-path ./
-
 echo "Certs exist"
 
 credhub delete -n /concourse/$2/acme_cert
