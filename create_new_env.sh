@@ -74,6 +74,7 @@ fi
 if [ "$1" = "vsphere" ]; then
   echo "Adding VSphere vals"
   credhub set --type value --name /concourse/$2/installation_name --value "$2"
+  credhub set --type value --name /concourse/$2/fqdn --value "$3"
   credhub set --type value --name /concourse/$2/network_dns --value "$(credhub get -n /concourse/pa/network_dns -j | jq .value)"
   credhub set --type value --name /concourse/$2/network_netmask --value "$(credhub get -n /concourse/pa/network_netmask -j | jq .value)"
   credhub set --type value --name /concourse/$2/network_gateway --value "$(credhub get -n /concourse/pa/network_gateway -j | jq .value)"
