@@ -35,19 +35,20 @@ credhub set --type value --name /concourse/pa/gcp_credentials_json --value <'<gc
 credhub set --type value --name /concourse/pa/project --value <project name in gcp>
 
 # Values specific to VSphere on-prem environments (comment if not needed)
-credhub set --type value --name /concourse/pa/homelab_dns --value <dns address>
-credhub set --type value --name /concourse/pa/homelab_netmask --value <netmask>
-credhub set --type value --name /concourse/pa/homelab_gateway --value <gateway address>
+credhub set --type value --name /concourse/pa/network_dns --value <dns address>
+credhub set --type value --name /concourse/pa/network_netmask --value <netmask>
+credhub set --type value --name /concourse/pa/network_gateway --value <gateway address>
 credhub set --type value --name /concourse/pa/opsman_private_ip --value <internal opsman ip>
 credhub set --type value --name /concourse/pa/minio_endpoint --value <minio endpoint>
 credhub set --type value --name /concourse/pa/minio_secret_key --value <secret key>
 credhub set --type value --name /concourse/pa/minio_access_key --value <access key>
-credhub set --type ssh --name /concourse/pa/homelab_ssh_pub  --public <path to public key> --private <path to private key>
-credhub set --type value --name /concourse/pa/homelab_network --value <network name in vsphere>
+credhub set --type ssh --name /concourse/pa/buccbox_ssh_pub  --public <path to public key> --private <path to private key>
+credhub set --type value --name /concourse/pa/vcenter_network --value <network name in vsphere>
 credhub set --type value --name /concourse/pa/vcenter_folder --value <vcenter folder name>
 credhub set --type value --name /concourse/pa/vcenter_host --value <vcenter hostname>
 credhub set --type value --name /concourse/pa/vcenter_url --value <vcenter url (https://hostname)>
 credhub set --type value --name /concourse/pa/vcenter_user --value <full sso user name (administrator@domain)>
+credhub set --type value --name /concourse/pa/vcenter_password --value <password>
 credhub set --type value --name /concourse/pa/vcenter_datastore --value <vcenter datastore>
 credhub set --type value --name /concourse/pa/vcenter_dc --value <vcenter datacenter name>
 credhub set --type value --name /concourse/pa/opsman_hostname --value <hostname for opsman>
