@@ -29,7 +29,7 @@ curl -L https://k14s.io/install.sh | sudo bash
 ```
 
 yaml-patch https://github.com/krishicks/yaml-patch/releases
-```
+Download it from the releases page and put it into your path
 
 Docker is required to run Minio (remove old libs first)
 ```
