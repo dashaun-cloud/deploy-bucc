@@ -21,19 +21,35 @@ sudo add-apt-repository universe
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt install certbot python3-certbot-dns-cloudflare -y
 ```
+A couple of dependencies do not have an apt repository
 
+YTT (part of k14s) https://github.com/k14s/ytt
+```
+curl -L https://k14s.io/install.sh | sudo bash
+```
+
+yaml-patch https://github.com/krishicks/yaml-patch/releases
+```
+
+Docker is required to run Minio (remove old libs first)
+```
+sudo apt remove docker docker-engine docker.io containerd runc
+sudo apt update
+sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io
+```
 
 For GCP: bucc up --cpi gcp --concourse-lb
 - Add a tag so we can create some firewall rules around it.  I've used "bucc" in the sample vars file.
 
 ```
-- ytt - https://github.com/k14s/ytt
-- certbot
-```
 
-```
-- docker
-- yaml-patch - https://github.com/krishicks/yaml-patch/releases
 - minio (for on-prem/vsphere - create cert, run as https)
 
 certbot certonly --dns-cloudflare \
