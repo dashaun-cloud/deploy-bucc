@@ -4,8 +4,6 @@ Some additional scripts, to make starting from zero a little easier.
 
 Getting started:
 
-Make sure to grab a release and not master from https://github.com/starkandwayne/bucc
-
 ```
 git clone https://github.com/starkandwayne/bucc
 cd bucc
@@ -13,27 +11,31 @@ git checkout v0.9.0
 git submodule add https://github.com/dashaun-cloud/deploy-bucc
 ```
 
+If you plan to use the platform-automation-* repositories as well there are some additional dependencies:
+
+```
+sudo apt install jq
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt install certbot python3-certbot-dns-cloudflare -y
+```
+
+
 For GCP: bucc up --cpi gcp --concourse-lb
 - Add a tag so we can create some firewall rules around it.  I've used "bucc" in the sample vars file.
 
-Additional installation:
-- jq
-```
-apt install jq
 ```
 - ytt - https://github.com/k14s/ytt
 - certbot
 ```
-apt update
-apt install software-properties-common
-add-apt-repository universe
-add-apt-repository ppa:certbot/certbot
-apt install certbot python3-certbot-dns-cloudflare -y
+
 ```
 - docker
 - yaml-patch - https://github.com/krishicks/yaml-patch/releases
 - minio (for on-prem/vsphere - create cert, run as https)
-```
+
 certbot certonly --dns-cloudflare \
   --dns-cloudflare-propagation-seconds 60  \
   --dns-cloudflare-credentials ./cloudflare.ini \
