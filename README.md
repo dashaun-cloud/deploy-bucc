@@ -1,6 +1,17 @@
 # deploy-bucc
 
+Some additional scripts, to make starting from zero a little easier.
+
+Getting started:
+
 Make sure to grab a release and not master from https://github.com/starkandwayne/bucc
+
+```
+git clone https://github.com/starkandwayne/bucc
+cd bucc
+git checkout v0.9.0
+git submodule add https://github.com/dashaun-cloud/deploy-bucc
+```
 
 For GCP: bucc up --cpi gcp --concourse-lb
 - Add a tag so we can create some firewall rules around it.  I've used "bucc" in the sample vars file.
