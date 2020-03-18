@@ -14,9 +14,9 @@ git submodule add https://github.com/dashaun-cloud/deploy-bucc
 If you plan to use the platform-automation-* repositories as well there are some additional dependencies:
 
 ```
-sudo apt install jq
+sudo apt install jq -y
 sudo apt update
-sudo apt install software-properties-common
+sudo apt install software-properties-common -y
 sudo add-apt-repository universe
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt install certbot python3-certbot-dns-cloudflare -y
