@@ -51,6 +51,9 @@ credhub delete -n /concourse/pa/gcp_credentials_json &>/dev/null
 credhub set --type value --name /concourse/pa/gcp_credentials_json --value "${GCP_CREDENTIALS_JSON}"
 credhub delete -n /concourse/pa/project &>/dev/null
 credhub set --type value --name /concourse/pa/project --value "${GCP_PROJECT_NAME}"
+#SLACK
+credhub delete -n /concourse/pa/slack-webhook &>/dev/null
+credhub set --type value --name /concourse/pa/slack-webook --value "${SLACK_WEBHOOK}"
 # Values specific to VSphere on-prem environments (comment if not needed)
 #credhub set --type value --name /concourse/pa/homelab_dns --value <dns address>
 #credhub set --type value --name /concourse/pa/homelab_netmask --value <netmask>

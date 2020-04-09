@@ -53,17 +53,15 @@ Populate this new .envrc file with your secrets.
 
 Now put those values into the current environment:
 
-
-Option 1: With direnv installed:
 ```
 source deploy-bucc/.envrc
-bash deploy-bucc/credhub-vars.sh
+./deploy-bucc/credhub-vars.sh
 ```
 
 You now have some of your secrets stored in CredHub.
 
 ```
-rm deploy-bucc/.envrc
+rm ./deploy-bucc/.envrc
 ```
 
 ### Create a new CredHub path with values for platform automation
@@ -83,4 +81,11 @@ sudo add-apt-repository ppa:certbot/certbot
 sudo apt install certbot python3-certbot-dns-cloudflare -y
 ```
 
+Setup a Concourse path for your new foundation:
+
+```
+./deploy-bucc/create_new_env.sh gcp demo codeinthecloud.io
+```
+
+You are now ready to move on to platform-automation-pipelines!
 

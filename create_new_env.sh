@@ -66,6 +66,10 @@ echo "Adding Decryption Passphrase"
 credhub delete -n /concourse/$2/decryption_passphrase &>/dev/null
 credhub generate -n /concourse/$2/decryption_passphrase -t password
 
+echo "Adding Slack Webhook"
+credhub delete -n /concourse/$2/slack-webhook &>/dev/null
+credhub set -n /concourse/$2/slack-webhook -t value -v "$(credhub get -n /concourse/pa/slack-webhook -j | jq .value)"
+
 if [ "$1" = "gcp" ]; then
   echo "Adding GCP vals"
 credhub delete -n /concourse/$2/project &>/dev/null
@@ -213,4 +217,3 @@ echo "If there were timeouts, its okay to re-run this script multiple times, its
 rm ./cloudflare.ini
 
 echo "Cleanup complete"
-
