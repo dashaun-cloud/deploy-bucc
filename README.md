@@ -1,8 +1,18 @@
 # deploy-bucc
 
-Some additional scripts, to make starting from zero a little easier.
+This is a helper project for the 'platform-automation-*' repositories.
 
-Getting started:
+It provides some additional scripts and conventions, to make starting from zero a little easier.
+
+## Getting started:
+
+This assumes you have a "jumpbox" created that can communicate with your IAAS.
+
+This assumes the jumpbox is Ubuntu 18.04 | 19.04 | 19.10 | 20.04
+
+The following steps will be executed on that jumpbox.
+
+### Checkout BUCC and the 'deploy-bucc' submodule  
 
 ```
 git clone https://github.com/starkandwayne/bucc
@@ -11,7 +21,67 @@ git checkout v0.9.0
 git submodule add https://github.com/dashaun-cloud/deploy-bucc
 ```
 
-If you plan to use the platform-automation-* repositories as well there are some additional dependencies:
+### Deploy BUCC
+
+On GCP:
+```
+bucc up --cpi gcp --concourse-lb
+```
+Edit the vars.yml, use samples/gcp.sample.vars.yml for guidance.
+
+This step takes a while:
+```
+bucc up
+```
+
+Install the credhub CLI:
+```
+bucc credhub
+```
+
+### Add some secrets
+
+This script expects some secrets to be provided as environment variables.
+
+You checked out bucc, and this submodule already above.
+
+```
+cp deploy-bucc/samples/.envrc.sample deploy-bucc/.envrc
+```
+
+Populate this new .envrc file with your secrets.
+
+Now put those values into the current environment:
+
+
+Option 1: With direnv installed:
+```
+cd deploy-bucc
+direnv allow
+./credhub-vars.sh
+```
+
+Option 2: Without direnv:
+```
+cd deploy-bucc
+source .envrc
+./credhub-vars.sh
+```
+
+You now have some of your secrets stored in CredHub.
+
+
+```
+rm .envrc
+```
+
+### Create a new CredHub path with values for platform automation
+
+This step will use values you provided above, to create a new path of values.
+
+Additionally, it will generate some secrets, generate some certificates.
+
+Your jumpbox needs a couple of dependencies for this task
 
 ```
 sudo apt install jq -y
@@ -21,53 +91,3 @@ sudo add-apt-repository universe
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt install certbot python3-certbot-dns-cloudflare -y
 ```
-A couple of dependencies do not have an apt repository
-
-YTT (part of k14s) https://github.com/k14s/ytt
-```
-curl -L https://k14s.io/install.sh | sudo bash
-```
-
-yaml-patch https://github.com/krishicks/yaml-patch/releases
-Download it from the releases page and put it into your path
-
-Docker is required to run Minio (remove old libs first)
-```
-sudo apt remove docker docker-engine docker.io containerd runc
-sudo apt update
-sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-sudo apt update
-sudo apt install docker-ce docker-ce-cli containerd.io
-```
-
-For GCP: bucc up --cpi gcp --concourse-lb
-- Add a tag so we can create some firewall rules around it.  I've used "bucc" in the sample vars file.
-
-```
-
-- minio (for on-prem/vsphere - create cert, run as https)
-
-certbot certonly --dns-cloudflare \
-  --dns-cloudflare-propagation-seconds 60  \
-  --dns-cloudflare-credentials ./cloudflare.ini \
-  --preferred-challenges dns-01 \
-  -d minio.domain \
-  --agree-tos \
-  -m email
-
-docker run -p 443:443 --name minio1 -e "MINIO_ACCESS_KEY=key" -e "MINIO_SECRET_KEY=password" -d -v /home/snoyes/.minio:/root/.minio/ -v /mnt/data:/data minio/minio server --address ":443" /data
-```
-  - create 2 buckets (foundation-installations, platform-automation)
-
-Once bucc has configured the bosh/concourse vm:
-- add default creds to credhub unless they exist (./credhub-vars.sh)
-- create environment (./create_new_env.sh gcp new_gcp_environment_name dashaun.cloud)
-- Login in to concourse (bucc info to get password) 
-- add target to fly (fly --target example login --team-name my-team --concourse-url https://ci.example.com --insecure)
-- create team in concourse (fly -t example set-team --team-name my-team --local-user foo)
-- fly pipelines!
