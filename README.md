@@ -56,23 +56,14 @@ Now put those values into the current environment:
 
 Option 1: With direnv installed:
 ```
-cd deploy-bucc
-direnv allow
-./credhub-vars.sh
-```
-
-Option 2: Without direnv:
-```
-cd deploy-bucc
-source .envrc
-./credhub-vars.sh
+source deploy-bucc/.envrc
+bash deploy-bucc/credhub-vars.sh
 ```
 
 You now have some of your secrets stored in CredHub.
 
-
 ```
-rm .envrc
+rm deploy-bucc/.envrc
 ```
 
 ### Create a new CredHub path with values for platform automation
@@ -91,3 +82,5 @@ sudo add-apt-repository universe
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt install certbot python3-certbot-dns-cloudflare -y
 ```
+
+
