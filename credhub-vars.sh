@@ -6,6 +6,10 @@ credhub delete -n /concourse/pa/wavefront-token &>/dev/null
 credhub set --type value --name /concourse/pa/wavefront-token --value "${WAVEFRONT_TOKEN}"
 credhub delete -n /concourse/pa/sendgrid-api &>/dev/null
 credhub set --type value --name /concourse/pa/sendgrid-api --value "${SENDGRID_TOKEN}"
+credhub delete -n /concourse/pa/sendgrid-host &>/dev/null
+credhub set --type value --name /concourse/pa/sendgrid-host --value "${SENDGRID_HOST}"
+credhub delete -n /concourse/pa/sendgrid-port &>/dev/null
+credhub set --type value --name /concourse/pa/sendgrid-port --value "${SENDGRID_PORT}"
 credhub delete -n /concourse/pa/pivnet_token &>/dev/null
 credhub set --type value --name /concourse/pa/pivnet_token --value "${PIVNET_TOKEN}"
 credhub delete -n /concourse/pa/git_ssh_key &>/dev/null
@@ -53,7 +57,7 @@ credhub delete -n /concourse/pa/project &>/dev/null
 credhub set --type value --name /concourse/pa/project --value "${GCP_PROJECT_NAME}"
 #SLACK
 credhub delete -n /concourse/pa/slack-webhook &>/dev/null
-credhub set --type value --name /concourse/pa/slack-webook --value "${SLACK_WEBHOOK}"
+credhub set --type value --name /concourse/pa/slack-webhook --value "${SLACK_WEBHOOK}"
 # Values specific to VSphere on-prem environments (comment if not needed)
 #credhub set --type value --name /concourse/pa/homelab_dns --value <dns address>
 #credhub set --type value --name /concourse/pa/homelab_netmask --value <netmask>

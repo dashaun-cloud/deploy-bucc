@@ -27,6 +27,16 @@ credhub set -n /concourse/$2/environment_name -t value -v $2
 credhub delete -n /concourse/$2/email &>/dev/null
 credhub set -n /concourse/$2/email -t value -v "$(credhub get -n /concourse/pa/email -j | jq .value)"
 
+echo "Adding SendGrid"
+credhub delete -n /concourse/$2/sendgrid-api &>/dev/null
+credhub set -n /concourse/$2/sendgrid-api -t value -v "$(credhub get -n /concourse/pa/sendgrid-api -j | jq .value)"
+
+credhub delete -n /concourse/$2/sendgrid-host &>/dev/null
+credhub set -n /concourse/$2/sendgrid-host -t value -v "$(credhub get -n /concourse/pa/sendgrid-host -j | jq .value)"
+
+credhub delete -n /concourse/$2/sendgrid-port &>/dev/null
+credhub set -n /concourse/$2/sendgrid-port -t value -v "$(credhub get -n /concourse/pa/sendgrid-port -j | jq .value)"
+
 echo "Adding app.terraform.io"
 credhub delete -n /concourse/$2/app_terraform_io_token &>/dev/null
 credhub set -n /concourse/$2/app_terraform_io_token -t value -v "$(credhub get -n /concourse/pa/app_terraform_io_token -j | jq .value)"
