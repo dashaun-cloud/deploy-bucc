@@ -27,6 +27,10 @@ credhub set -n /concourse/$2/environment_name -t value -v $2
 credhub delete -n /concourse/$2/email &>/dev/null
 credhub set -n /concourse/$2/email -t value -v "$(credhub get -n /concourse/pa/email -j | jq .value)"
 
+echo "Adding Wavefront"
+credhub delete -n /concourse/$2/wavefront-token &>/dev/null
+credhub set -n /concourse/$2/wavefront-token -t value -v "$(credhub get -n /concourse/pa/wavefront-token -j | jq .value)"
+
 echo "Adding SendGrid"
 credhub delete -n /concourse/$2/sendgrid-api &>/dev/null
 credhub set -n /concourse/$2/sendgrid-api -t value -v "$(credhub get -n /concourse/pa/sendgrid-api -j | jq .value)"
